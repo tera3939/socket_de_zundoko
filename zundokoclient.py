@@ -1,31 +1,40 @@
+#!/usr/bin/env python3
+# -*-coding:utf-8-*-
+
 import socket
 
-target_host = 'localhost'
-target_port = 9999
-get_kiyoshi = True
+class ZundokoClient:
+    def __init__(self):
+        self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    def get_zundoko(self, target_host, target_port):
+        get_kiyoshi = False
+        try:
+            client.connect((target_host, target_port))
 
-try:
-    client.connect((target_host, target_port))
+            # 'キ・ヨ・シ!!'が送られてくるまでループ
+            while not get_kiyoshi:
 
-    # 'キ・ヨ・シ!!'が送られてくるまでループ
-    while get_kiyoshi:
+                data = client.recv(4096)
+                zundoko = data.decode()
 
-        data = client.recv(4096)
-        zundoko = data.decode()
+                print(zundoko)
 
-        print(zundoko)
+                if zundoko == 'キ・ヨ・シ!!':
+                    get_kiyoshi = True
 
-        if zundoko == 'キ・ヨ・シ!!':
-            get_kiyoshi = False
+                # 通信同期用のsend
+                client.send('ok'.encode())
+            else:
+                client.close()
+                print('ズンドコ成功')
 
-        # 通信同期用のsend
-        client.send('ok'.encode())
-    else:
-        client.close()
-        print('ズンドコ成功')
+        except:
+            print('ズンドコ失敗')
+            client.close()
 
-except:
-    print('ズンドコ失敗')
-    client.close()
+if __name__ == '__main__':
+    target_host = 'localhost'
+    target_port = 9999
+    zundoko = ZundokoClient()
+    zundoko.get_zundoko()
