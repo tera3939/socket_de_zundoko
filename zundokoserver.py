@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*-coding:utf-8-*-
+
 import random
 import socket
 import threading
@@ -13,10 +16,10 @@ class ZundokoServer:
         while True:
             client_socket, addr = self.server.accept()
             client_thread = threading.Thread(
-                    target=self.zundoko_handler, args=(client_socket,))
+                    target=self._zundoko_handler, args=(client_socket,))
             client_thread.start()
 
-    def zundoko_handler(self, client_socket):
+    def _zundoko_handler(self, client_socket):
         send_kiyoshi = False
         zun = 0
         # 'キ・ヨ・シ!!'が送られるまでループ
@@ -31,7 +34,7 @@ class ZundokoServer:
             else:
                 zun = 0
             # 通信同期用のrecv
-            buf = client_socket.recv(1024)
+            client_socket.recv(1024)
         else:
             print('ズンドコ完了')
             client_socket.close()
