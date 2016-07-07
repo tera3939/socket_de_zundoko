@@ -10,8 +10,8 @@ class ZundokoServer:
     def __init__(self):
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    def zundoko_start(self, bind_ip, bind_port):
-        self.server.bind((bind_ip, bind_port))
+    def zundoko_start(self, ip, port):
+        self.server.bind((ip, port))
         self.server.listen(5)
         while True:
             client_socket, addr = self.server.accept()

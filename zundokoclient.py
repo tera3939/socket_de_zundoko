@@ -11,22 +11,22 @@ class ZundokoClient:
     def get_zundoko(self, host, port):
         get_kiyoshi = False
         try:
-            client.connect((host, port))
+            self.client.connect((host, port))
             # 'キ・ヨ・シ!!'が送られてくるまでループ
             while not get_kiyoshi:
-                data = client.recv(4096)
+                data = self.client.recv(4096)
                 zundoko = data.decode()
                 print(zundoko)
                 if zundoko == 'キ・ヨ・シ!!':
                     get_kiyoshi = True
                 # 通信同期用のsend
-                client.send('ok'.encode())
+                self.client.send('ok'.encode())
             else:
-                client.close()
+                self.client.close()
                 print('ズンドコ成功')
         except InterruptedError:
             print('ズンドコ失敗')
-            client.close()
+            self.client.close()
 
 if __name__ == '__main__':
     target_host = 'localhost'
