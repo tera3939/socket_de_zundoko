@@ -19,6 +19,7 @@ class ZundokoServer:
                     target=self._zundoko_handler, args=(client_socket,))
             client_thread.start()
 
+    @staticmethod
     def _zundoko_handler(self, client_socket):
         send_kiyoshi = False
         zun = 0
