@@ -19,7 +19,6 @@ class ZundokoServer:
                     target=self._zundoko_handler, args=(client_socket,))
             client_thread.start()
 
-    @staticmethod
     def _zundoko_handler(self, client_socket):
         send_kiyoshi = False
         zun = 0
@@ -45,5 +44,6 @@ if __name__ == '__main__':
     zundoko = ZundokoServer()
     bind_ip = '127.0.0.1'
     bind_port = 9999
+    print('ズンドコサーバ起動！！！')
     zundoko.zundoko_start(bind_ip, bind_port)
 
