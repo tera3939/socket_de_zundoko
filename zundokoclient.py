@@ -32,4 +32,4 @@ if __name__ == '__main__':
     target_host = 'localhost'
     target_port = 9999
     zundoko = ZundokoClient()
-    zundoko.get_zundoko()
+    zundoko.get_zundoko(target_host, target_port)
